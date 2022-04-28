@@ -3,11 +3,14 @@ package com.lessonsapp.todo.tasklist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.lessonsapp.todo.R
 
 class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
+
+    var onClickDelete: (Task) -> Unit = {}
 
     var currentList: List<Task> = emptyList()
 
@@ -19,6 +22,11 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.TaskViewHolder>() {
 
             val descTextView = itemView.findViewById<TextView>(R.id.descTextView)
             descTextView.text = task.description
+
+            val deleteButton = itemView.findViewById<ImageButton>(R.id.imageButton)
+            deleteButton.setOnClickListener {
+                onClickDelete(task)
+            }
         }
     }
 
